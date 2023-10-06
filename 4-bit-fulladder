@@ -30,6 +30,6 @@ cin = 1'b0;
 #100;
 end
 always #5 cin = ~cin;
-always #10 a = ~a+1;
-always #160 b = ~b+1;
+always #10 a = ~a;
+always #160 b = ~b;
 endmodule
