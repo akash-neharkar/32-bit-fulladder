@@ -1,0 +1,37 @@
+RTL Code
+
+module sixteenbitfulladder (a, b, cin, sum, cout);
+input [15:0] a, b;
+input cin;
+
+output [15:0] sum;
+output cout;
+
+wire l1;
+
+eightbitfulladder fa_0 (a[7:0], b[7:0], cin, sum[7:0], l1);
+eightbitfulladder fa_1 (a[15:8], b[15:8], l1, sum[15:8], cout);
+
+endmodule
+
+
+
+
+TestBench COde
+
+module sixteenbitfulladder_tb();
+reg [15:0] a,b,cin;
+wire [15:0] sum;
+wire cout;
+sixteenbitfulladder uut(a,b,cin,sum,cout);
+initial
+begin
+a = 16'b0;
+b = 16'b0;
+cin = 1'b0;
+#100;
+end
+always #5 cin = ~cin;
+always #10 a = ~a;
+always #160 b = ~b;
+endmodule
