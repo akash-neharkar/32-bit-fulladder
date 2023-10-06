@@ -1,0 +1,37 @@
+RTL code
+
+module thirtytwobitfulladder (a, b, cin, sum, cout);
+input [31:0] a, b;
+input cin;
+
+output [31:0] sum;
+output cout;
+
+wire l1;
+
+sixteenbitfulladder fa_0 (a[15:0], b[15:0], cin, sum[15:0], l1);
+sixteenbitfulladder fa_1 (a[31:16], b[31:16], l1, sum[31:16], cout);
+
+endmodule
+
+
+
+
+TestBench Code
+
+module thirtytwobitfulladder_tb();
+reg [31:0] a,b,cin;
+wire [31:0] sum;
+wire cout;
+thirtytwobitfulladder uut(a,b,cin,sum,cout);
+initial
+begin
+a = 32'b0;
+b = 32'b0;
+cin = 1'b0;
+#100;
+end
+always #5 cin = ~cin;
+always #10 a = ~a;
+always #160 b = ~b;
+endmodule
